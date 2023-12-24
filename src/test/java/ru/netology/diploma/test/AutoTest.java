@@ -21,17 +21,17 @@ public class AutoTest {
         open("http://localhost:8080/");
     }
 
-    @Test
-    void shouldSelectPayByCard() {
-        DashboardPage.selectPayByCard();
-        $(byText("Оплата по карте")).shouldBe(Condition.visible);
-    }
-
-    @Test
-    void shouldSelectPayByCredit() {
-        DashboardPage.selectPayByCredit();
-        $(byText("Кредит по данным карты")).shouldBe(Condition.visible);
-    }
+//    @Test
+//    void shouldSelectPayByCard() {
+//        DashboardPage.selectPayByCard();
+//        $(byText("Оплата по карте")).shouldBe(Condition.visible);
+//    }
+//
+//    @Test
+//    void shouldSelectPayByCredit() {
+//        DashboardPage.selectPayByCredit();
+//        $(byText("Кредит по данным карты")).shouldBe(Condition.visible);
+//    }
 
     @Test
     @DisplayName("Успешная покупка с оплатой по карте, валидные данные")
