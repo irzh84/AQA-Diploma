@@ -3,25 +3,31 @@ package ru.netology.diploma.data;
 import com.github.javafaker.Faker;
 import lombok.Value;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Locale;
-import java.util.Random;
 
 public class DataHelper {
     private DataHelper() {
     }
 
     public static CardNumber setValidCardNumberApproved() {
-        return new CardNumber("4444 4444 4444 4441");
+        return new CardNumber("4444 4444 4444 4441", "APPROVED");
     }
 
-    public static String generateValidMonthInValidYear() {
-        var validMonth = new String[]{"01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"};
-        return validMonth[new Random().nextInt(validMonth.length)];
+    private static String generateDate(String pattern) {
+
+        return LocalDate.now().format(DateTimeFormatter.ofPattern(pattern));
+    }
+
+    public static String generateValidMonth() {
+        String validMonth = generateDate("MM");
+        return validMonth;
     }
 
     public static String generateValidYear() {
-        var validYear = new String[]{"24", "25", "26", "27", "28"};
-        return validYear[new Random().nextInt(validYear.length)];
+        String validYear = generateDate("yy");
+        return validYear;
     }
 
     public static String generateValidName() {
@@ -37,6 +43,12 @@ public class DataHelper {
     @Value
     public static class CardNumber {
         String cardNumber;
+        String status;
+    }
+
+    @Value
+    public static class OperationStatus {
+        String status;
     }
 }
 
