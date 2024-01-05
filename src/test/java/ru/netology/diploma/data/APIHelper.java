@@ -7,23 +7,23 @@ import io.restassured.specification.RequestSpecification;
 
 import static io.restassured.RestAssured.given;
 
-public class APIHelper {
-    private static RequestSpecification requestSpec = new RequestSpecBuilder()
-            .setBaseUri("http://localhost")
-            .setPort(8080)
-            .setAccept(ContentType.JSON)
-            .setContentType(ContentType.JSON)
-            .log(LogDetail.ALL)
-            .build();
-
-    public static DataHelper.CardNumber sendRequest(DataHelper.CardNumber card) {
-        given()
-                .spec(requestSpec)
-                .body(card)
-                .when()
-                .post()
-                .then()
-                .statusCode(200);
-        return card;
-    }
-}
+//public class APIHelper {
+//    private static RequestSpecification requestSpec = new RequestSpecBuilder()
+//            .setBaseUri("http://localhost")
+//            .setPort(8080)
+//            .setAccept(ContentType.JSON)
+//            .setContentType(ContentType.JSON)
+//            .log(LogDetail.ALL)
+//            .build();
+//
+//    public static DataHelper.CardNumber sendRequest(DataHelper.CardNumber card) {
+//        given()
+//                .spec(requestSpec)
+//                .body(card)
+//                .when()
+//                .post()
+//                .then()
+//                .statusCode(200);
+//        return card;
+//    }
+//}

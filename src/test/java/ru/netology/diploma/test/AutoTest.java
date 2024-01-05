@@ -15,32 +15,27 @@ public class AutoTest {
     DashboardPage dashboardPage;
     PaymentGatePage paymentGatePage;
 
-    @AfterAll
-    static void tearDownAll() {
-        cleanDatabase();
-    }
-
     @BeforeEach
     void setup() {
+        cleanDatabase();
         dashboardPage = open("http://localhost:8080/", DashboardPage.class);
     }
 
     @Test
     @DisplayName("Успешная покупка с оплатой по карте, валидные данные")
     void shouldCardSuccessfulPayment() {
-        dashboardPage.selectPayByCard();
+        paymentGatePage = dashboardPage.selectPayByCard();
         var card = DataHelper.setValidCardNumberApproved();
         var month = DataHelper.generateValidMonth();
         var year = DataHelper.generateValidYear();
         var name = DataHelper.generateValidName();
         var cvc = DataHelper.generateValidCvc();
-        paymentGatePage = new PaymentGatePage();
         paymentGatePage.fillForm(card, month, year, name, cvc);
         paymentGatePage.clickButtonContinue();
         paymentGatePage.checkNotificationSuccessful();
 
-        var actualVerifyOperationInDB = SQLHelper.getStatusPaymentGatePage();
-        var expected = "APPROVED";
-        assertEquals(expected, actualVerifyOperationInDB);
+        var actualVerifyOperationInDb = SQLHelper.getStatusPaymentGatePage();
+        var expected = card.getStatus();
+        assertEquals(expected, actualVerifyOperationInDb);
     }
 }
