@@ -17,6 +17,7 @@ public class AutoTest {
 
     @BeforeEach
     void setup() {
+        cleanDatabase();
         dashboardPage = open("http://localhost:8080/", DashboardPage.class);
     }
 
