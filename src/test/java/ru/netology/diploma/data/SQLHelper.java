@@ -29,7 +29,7 @@ public class SQLHelper {
     @SneakyThrows
     public static void cleanDatabase() {
         var connection = getConn();
-        runner.execute(connection, "DELETE FROM payment_entity");
+        // runner.execute(connection, "DELETE FROM payment_entity");
         runner.execute(connection, "DELETE FROM credit_request_entity");
         runner.execute(connection, "DELETE FROM order_entity");
     }
