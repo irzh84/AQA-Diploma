@@ -10,7 +10,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Container start
-        run: docker-compose up &
+        run: docker-compose up --build &
       - name: Waiting for сontainer start
         run: sleep 30
       - name: Set up JDK 11
@@ -21,7 +21,7 @@ jobs:
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
       - name: Start SUT
-        run: java -jar artifacts/aqa-shop.jar & # Имя файла SUT будет отличаться в каждой задаче
+        run: java "-Dspring.datasource.url=jdbc:mysql://localhost:3306/app" -jar artifacts/aqa-shop.jar & # Имя файла SUT будет отличаться в каждой задаче
       - name: Build with Gradle
-        run: ./gradlew test --info -Dselenide.headless=true
+        run: ./gradlew clean test "-Ddb.url=jdbc:mysql://localhost:3306/app" --info -Dselenide.headless=true
       
