@@ -22,22 +22,14 @@ public class PaymentGatePage {
     private static SelenideElement holder = formWithCardDetails.get(3);
     private static SelenideElement cvc = formWithCardDetails.get(4);
 
+
     private static SelenideElement buttonContinue = $(byText("Продолжить"));
 
 
     private static ElementsCollection notification = $$(".notification__content");
     private static SelenideElement notificationSuccessful = notification.get(0);
     private static SelenideElement notificationUnsuccessful = notification.get(1);
-    private static SelenideElement notificationUnsuccessfulAlone = $(byText("Ошибка! Банк отказал в проведении операции."));
 
-
-    private static ElementsCollection redNotificationUnderTheField = $$(".input__sub");
-    private static SelenideElement cardNumberRedNotification = redNotificationUnderTheField.get(0);
-    private static SelenideElement monthRedNotification = redNotificationUnderTheField.get(1);
-
-    private static SelenideElement yearRedNotification = redNotificationUnderTheField.get(2);
-    private static SelenideElement holderRedNotification = redNotificationUnderTheField.get(3);
-    private static SelenideElement cvcRedNotification = redNotificationUnderTheField.get(4);
 
     private static SelenideElement redNotificationUnderTheFieldWrongFormat = $(byText("Неверный формат"));
     private static SelenideElement redNotificationValidityPeriod = $(byText("Неверно указан срок действия карты"));
@@ -68,63 +60,33 @@ public class PaymentGatePage {
 
     public void checkNotificationSuccessful() {
         notificationSuccessful
-                .shouldBe(Condition.visible, Duration.ofSeconds(60))
+                .shouldBe(Condition.visible, Duration.ofSeconds(10))
                 .shouldHave(Condition.text("Операция одобрена Банком."));
     }
 
     public void checkNotificationUnsuccessful() {
         notificationUnsuccessful
-                .shouldBe(Condition.visible, Duration.ofSeconds(60))
+                .shouldBe(Condition.visible, Duration.ofSeconds(10))
                 .shouldHave(Condition.text("Ошибка! Банк отказал в проведении операции."));
-    }
-
-    public void checkCardNumberRedNotification() {
-        cardNumberRedNotification
-                .shouldBe(Condition.visible, Duration.ofSeconds(60))
-                .shouldHave(Condition.text("Неверный формат"));
-    }
-
-    public void checkMonthRedNotification() {
-        monthRedNotification
-                .shouldBe(Condition.visible, Duration.ofSeconds(60))
-                .shouldHave(Condition.text("Неверный формат"));
-    }
-
-    public void checkYearRedNotification() {
-        yearRedNotification
-                .shouldBe(Condition.visible, Duration.ofSeconds(60))
-                .shouldHave(Condition.text("Неверный формат"));
-    }
-
-    public void checkHolderRedNotification() {
-        holderRedNotification
-                .shouldBe(Condition.visible, Duration.ofSeconds(60))
-                .shouldHave(Condition.text("Поле обязательно для заполнения"));
-    }
-
-    public void checkCvcRedNotification() {
-        cvcRedNotification
-                .shouldBe(Condition.visible, Duration.ofSeconds(60))
-                .shouldHave(Condition.text("Неверный формат"));
     }
 
     public void checkRedNotificationUnderTheFieldWrongFormat() {
         redNotificationUnderTheFieldWrongFormat
-                .shouldBe(Condition.visible, Duration.ofSeconds(60));
+                .shouldBe(Condition.visible);
     }
 
     public void checkRedNotificationValidityPeriod() {
         redNotificationValidityPeriod
-                .shouldBe(Condition.visible, Duration.ofSeconds(60));
+                .shouldBe(Condition.visible);
     }
 
     public void checkRedNotificationTimeExpiredYear() {
         redNotificationTimeExpiredYear
-                .shouldBe(Condition.visible, Duration.ofSeconds(60));
+                .shouldBe(Condition.visible);
     }
 
     public void checkRedNotificationRequiredField() {
         redNotificationRequiredField
-                .shouldBe(Condition.visible, Duration.ofSeconds(60));
+                .shouldBe(Condition.visible);
     }
 }

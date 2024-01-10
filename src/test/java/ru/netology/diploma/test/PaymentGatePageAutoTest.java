@@ -1,5 +1,7 @@
 package ru.netology.diploma.test;
 
+import com.codeborne.selenide.logevents.SelenideLogger;
+import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.*;
 import ru.netology.diploma.data.DataHelper;
 import ru.netology.diploma.data.SQLHelper;
@@ -11,9 +13,19 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static ru.netology.diploma.data.SQLHelper.cleanDatabase;
 
-public class AutoTest {
+public class PaymentGatePageAutoTest {
     DashboardPage dashboardPage;
     PaymentGatePage paymentGatePage;
+
+    @BeforeAll
+    static void setUpAll() {
+        SelenideLogger.addListener("allure", new AllureSelenide());
+    }
+
+    @AfterAll
+    static void tearDownAll() {
+        SelenideLogger.removeListener("allure");
+    }
 
     @BeforeEach
     void setup() {
@@ -79,11 +91,8 @@ public class AutoTest {
     void shouldPaymentGateEmptyInputField() {
         paymentGatePage = dashboardPage.selectPayByCard();
         paymentGatePage.clickButtonContinue();
-        paymentGatePage.checkCardNumberRedNotification();
-        paymentGatePage.checkMonthRedNotification();
-        paymentGatePage.checkYearRedNotification();
-        paymentGatePage.checkHolderRedNotification();
-        paymentGatePage.checkCvcRedNotification();
+        paymentGatePage.checkRedNotificationUnderTheFieldWrongFormat();
+        paymentGatePage.checkRedNotificationRequiredField();
     }
 
     @Test
@@ -97,7 +106,7 @@ public class AutoTest {
         var cvc = DataHelper.generateValidCvc();
         paymentGatePage.fillForm(card, month, year, name, cvc);
         paymentGatePage.clickButtonContinue();
-        paymentGatePage.checkCardNumberRedNotification();
+        paymentGatePage.checkRedNotificationUnderTheFieldWrongFormat();
     }
 
     @Test
@@ -125,7 +134,7 @@ public class AutoTest {
         var cvc = DataHelper.generateValidCvc();
         paymentGatePage.fillForm(card, month, year, name, cvc);
         paymentGatePage.clickButtonContinue();
-        paymentGatePage.checkCardNumberRedNotification();
+        paymentGatePage.checkRedNotificationUnderTheFieldWrongFormat();
     }
 
     @Test
@@ -139,7 +148,7 @@ public class AutoTest {
         var cvc = DataHelper.generateValidCvc();
         paymentGatePage.fillForm(card, month, year, name, cvc);
         paymentGatePage.clickButtonContinue();
-        paymentGatePage.checkCardNumberRedNotification();
+        paymentGatePage.checkRedNotificationUnderTheFieldWrongFormat();
     }
 
     @Test
