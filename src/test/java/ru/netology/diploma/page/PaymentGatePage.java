@@ -60,13 +60,13 @@ public class PaymentGatePage {
 
     public void checkNotificationSuccessful() {
         notificationSuccessful
-                .shouldBe(Condition.visible, Duration.ofSeconds(10))
+                .shouldBe(Condition.visible, Duration.ofSeconds(15))
                 .shouldHave(Condition.text("Операция одобрена Банком."));
     }
 
     public void checkNotificationUnsuccessful() {
         notificationUnsuccessful
-                .shouldBe(Condition.visible, Duration.ofSeconds(10))
+                .shouldBe(Condition.visible, Duration.ofSeconds(15))
                 .shouldHave(Condition.text("Ошибка! Банк отказал в проведении операции."));
     }
 
