@@ -1,6 +1,5 @@
 package ru.netology.diploma.data;
 
-import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.filter.log.LogDetail;
 import io.restassured.http.ContentType;
@@ -18,16 +17,47 @@ public class APIHelper {
             .log(LogDetail.ALL)
             .build();
 
-public static String returnResponsePaymentGate200(DataHelper.CardNumber card) {
-    Response response = given()
-            .spec(requestSpec)
-            .body(card)
-            .when()
-            .post("/api/v1/pay")
-            .then()
-            .statusCode(200)
-            .extract().response();
-    return response.asString();
-}
+    public static String returnResponsePaymentGate200(DataHelper.APICardInfo card) {
+        Response response = given()
+                .spec(requestSpec)
+                .body(card)
+                .when()
+                .post("/api/v1/pay")
+                .then()
+                .statusCode(200)
+                .extract().response();
+        return response.path("status");
+    }
 
+    public static void PaymentGate500(DataHelper.APICardInfo card) {
+        given()
+                .spec(requestSpec)
+                .body(card)
+                .when()
+                .post("/api/v1/pay")
+                .then()
+                .statusCode(500);
+    }
+
+    public static String returnResponseCreditGate200(DataHelper.APICardInfo card) {
+        Response response = given()
+                .spec(requestSpec)
+                .body(card)
+                .when()
+                .post("/api/v1/credit")
+                .then()
+                .statusCode(200)
+                .extract().response();
+        return response.path("status");
+    }
+
+    public static void CreditGate500(DataHelper.APICardInfo card) {
+        given()
+                .spec(requestSpec)
+                .body(card)
+                .when()
+                .post("/api/v1/credit")
+                .then()
+                .statusCode(500);
+    }
 }

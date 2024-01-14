@@ -2,6 +2,7 @@ package ru.netology.diploma.data;
 
 import com.github.javafaker.Faker;
 import lombok.Value;
+import org.checkerframework.checker.units.qual.A;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -134,6 +135,18 @@ public class DataHelper {
         return result;
     }
 
+    public static APICardInfo postAPIValidCardNumberApproved() {
+        return new APICardInfo("4444 4444 4444 4441", "24", "01", "Anna", "345");
+    }
+
+    public static APICardInfo postAPIInvalidCardNumberDeclined() {
+        return new APICardInfo("4444 4444 4444 4442", "24", "01", "Anna", "345");
+    }
+
+    public static APICardInfo postAPIInvalidCardNumber() {
+        return new APICardInfo("4444 4444 4444 4444", "24", "01", "Anna", "345");
+    }
+
     @Value
     public static class CardNumber {
         String cardNumber;
@@ -143,5 +156,14 @@ public class DataHelper {
     @Value
     public static class OperationStatus {
         String status;
+    }
+
+    @Value
+    public static class APICardInfo {
+        String number;
+        String year;
+        String month;
+        String holder;
+        String cvc;
     }
 }
