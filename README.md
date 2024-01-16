@@ -45,7 +45,7 @@
 
 `./gradlew clean test "-Ddb.url=jdbc:postgresql://localhost:5432/app"` 
 
-### Команда для генерации отчёта в Allure и автоматическое открытие в браузере:
+### Команда для генерации отчёта в Allure с автоматическим открытием в браузере:
 
 `./gradlew allureServe`
 
