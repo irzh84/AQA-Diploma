@@ -15,7 +15,7 @@ public class APITest {
         var card = DataHelper.postAPIValidCardNumberApproved();
         String path = "/api/v1/pay";
         int apiStatus = 200;
-        var actual = APIHelper.returnResponse(card, path, apiStatus);
+        APIHelper.returnResponse(card, path, apiStatus);
 
         var actualVerifyOperationInDb = SQLHelper.getStatusPaymentGatePage();
         var expected = "APPROVED";
@@ -28,7 +28,7 @@ public class APITest {
         var card = DataHelper.postAPIInvalidCardNumberDeclined();
         String path = "/api/v1/pay";
         int apiStatus = 500;
-        var actual = APIHelper.returnResponse(card, path, apiStatus);
+        APIHelper.returnResponse(card, path, apiStatus);
 
         var actualVerifyOperationInDb = SQLHelper.getStatusPaymentGatePage();
         var expected = "DECLINED";
@@ -52,7 +52,7 @@ public class APITest {
         var card = DataHelper.postAPIValidCardNumberApproved();
         String path = "/api/v1/credit";
         int apiStatus = 200;
-        var actual = APIHelper.returnResponse(card, path, apiStatus);
+        APIHelper.returnResponse(card, path, apiStatus);
 
         var actualVerifyOperationInDb = SQLHelper.getStatusCreditGatePage();
         var expected = "APPROVED";
@@ -65,7 +65,7 @@ public class APITest {
         var card = DataHelper.postAPIInvalidCardNumberDeclined();
         String path = "/api/v1/credit";
         int apiStatus = 500;
-        var actual = APIHelper.returnResponse(card, path, apiStatus);
+        APIHelper.returnResponse(card, path, apiStatus);
 
         var actualVerifyOperationInDb = SQLHelper.getStatusCreditGatePage();
         var expected = "DECLINED";
